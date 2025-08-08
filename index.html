@@ -1,0 +1,3355 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Fitness Tycoon</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #121212;
+            color: #f5f5f5;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #1e1e1e !important;
+        }
+
+        .navbar .navbar-brand span {
+            color: #ffffff !important;
+        }
+
+        .navbar a,
+        .navbar .btn-outline-dark {
+            color: #f5f5f5 !important;
+            border-color: #888 !important;
+        }
+
+        .navbar .btn-outline-dark:hover {
+            background-color: #333;
+            color: #fff !important;
+        }
+
+        .btn-success {
+            background-color: #2e7d32 !important;
+            border-color: #2e7d32 !important;
+        }
+
+        .btn-success:hover {
+            background-color: #388e3c !important;
+        }
+
+
+        .card {
+            background-color: #1e1e1e;
+            color: #f5f5f5;
+        }
+
+        .card .card-title {
+            color: var(--brand-teal);
+        }
+
+        .text-muted {
+            color: #aaa !important;
+        }
+
+        section {
+            background-color: #121212;
+        }
+
+        section.bg-light {
+            background-color: #1a1a1a !important;
+        }
+
+        footer {
+            background-color: #000 !important;
+            color: #eee;
+        }
+
+        .card iframe {
+            border-radius: 8px;
+        }
+
+        .card:hover {
+            transform: scale(1.02);
+            transition: 0.3s ease;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+        }
+
+        footer a {
+            color: #ddd;
+        }
+
+        footer a:hover {
+            color: #fff;
+        }
+
+        hr.border-light {
+            border-top: 1px solid #333;
+        }
+
+        .btn-outline-primary {
+            border-color: #90caf9;
+            color: #90caf9;
+        }
+
+        .btn-outline-primary:hover {
+            background-color: #90caf9;
+            color: #000;
+        }
+
+        .btn-outline-success {
+            border-color: #81c784;
+            color: #81c784;
+        }
+
+        .btn-outline-success:hover {
+            background-color: #81c784;
+            color: #000;
+        }
+
+        /* CSS Styles - Add to your stylesheet */
+        .our-impact {
+            background: linear-gradient(135deg, #ff6bb3, #c44db3, #9b59b6, #8e44ad);
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .our-impact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='1.5'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+            pointer-events: none;
+        }
+
+        .impact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .impact-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 1rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease-out 0.2s forwards;
+        }
+
+        .impact-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease-out 0.4s forwards;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2.5rem 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            opacity: 0;
+            transform: translateY(40px) scale(0.9);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .stat-card:hover::before {
+            left: 100%;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .stat-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            position: relative;
+            z-index: 2;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            color: white;
+            margin-bottom: 0.5rem;
+            display: block;
+            position: relative;
+            z-index: 2;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+            position: relative;
+            z-index: 2;
+        }
+
+        .animate-in {
+            animation: slideInUp 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes countUp {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .our-impact {
+                padding: 60px 15px;
+            }
+
+            .impact-title {
+                font-size: 2.5rem;
+            }
+
+            .impact-subtitle {
+                font-size: 1rem;
+                margin-bottom: 3rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 1.5rem;
+            }
+
+            .stat-card {
+                padding: 2rem 1rem;
+            }
+
+            .stat-number {
+                font-size: 2.5rem;
+            }
+
+            .stat-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .impact-title {
+                font-size: 2rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Pulse animation for icons */
+        .stat-icon {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-dark text-light">
+
+    <!-- Modern Dark Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top" id="mainNavbar">
+        <div class="container">
+            <!-- Brand -->
+            <a class="navbar-brand d-flex align-items-center" href="">
+                <div class="brand-icon me-2">
+                    <i class="fas fa-dumbbell"></i>
+                </div>
+                <span class="brand-text">Fitness<strong>Tycoon</strong></span>
+            </a>
+
+            <!-- Mobile Toggle -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navigation Links -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a href="" class="nav-link active">
+                            <i class="fas fa-home nav-icon"></i>
+                            Home
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="/login/" class="nav-link">
+                            <i class="fas fa-apple-alt nav-icon"></i>
+                            Diets
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/products/" class="nav-link">
+                            <i class="fas fa-blog nav-icon"></i>
+                            Products
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="/book/" class="nav-link">
+                            <i class="fas fa-vial nav-icon"></i>
+                            Blood Test
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="/enroll/" class="nav-link">
+                            <i class="fas fa-crown nav-icon"></i>
+                            Become Member
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Right Side Actions -->
+                <div class="navbar-actions d-flex align-items-center">
+                    <a href="/login/" class="btn btn-login">Login</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* ==================== NAVBAR STYLES ==================== */
+        #mainNavbar {
+            background: rgba(45, 55, 72, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.8rem 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        #mainNavbar.scrolled {
+            background: rgba(45, 55, 72, 0.98);
+            padding: 0.6rem 0;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Brand Styling */
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #ffffff !important;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand:hover {
+            transform: translateY(-1px);
+        }
+
+        .brand-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .brand-icon:hover {
+            transform: rotate(5deg) scale(1.05);
+        }
+
+        .brand-text {
+            color: #ffffff;
+            font-size: 1.4rem;
+            font-weight: 300;
+        }
+
+        .brand-text strong {
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Navigation Links */
+        .navbar-nav .nav-link {
+            color: rgba(255, 255, 255, 0.9) !important;
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 0.6rem 1rem !important;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 8px;
+            margin: 0 0.2rem;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #ffffff !important;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .navbar-nav .nav-link.active {
+            color: #ffffff !important;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .nav-icon {
+            margin-right: 0.5rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover .nav-icon {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        /* Action Buttons */
+        .navbar-actions .btn {
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 0.5rem 1.2rem;
+            border-radius: 25px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .btn-login {
+            color: #ffffff;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-login:hover {
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Mobile Toggle */
+        .navbar-toggler {
+            border: none;
+            padding: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-toggler:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.8%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 991px) {
+            .navbar-collapse {
+                background: rgba(45, 55, 72, 0.98);
+                backdrop-filter: blur(20px);
+                border-radius: 12px;
+                margin-top: 1rem;
+                padding: 1.5rem;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            }
+
+            .navbar-nav {
+                margin-bottom: 1rem;
+            }
+
+            .navbar-nav .nav-link {
+                color: rgba(255, 255, 255, 0.9) !important;
+                padding: 0.8rem 1rem !important;
+                margin: 0.2rem 0;
+                border-radius: 8px;
+            }
+
+            .navbar-nav .nav-link:hover {
+                background: rgba(255, 255, 255, 0.1);
+            }
+
+            .navbar-actions .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            padding-top: 80px;
+        }
+    </style>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const navbar = document.getElementById('mainNavbar');
+
+            // Navbar scroll effect with throttling
+            let ticking = false;
+
+            function updateNavbar() {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+                ticking = false;
+            }
+
+            window.addEventListener('scroll', function () {
+                if (!ticking) {
+                    requestAnimationFrame(updateNavbar);
+                    ticking = true;
+                }
+            });
+
+            // Active link highlighting
+            const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    // Remove active class from all links
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    // Add active class to clicked link
+                    this.classList.add('active');
+                });
+            });
+
+            // Smooth mobile menu animation
+            const navbarToggler = document.querySelector('.navbar-toggler');
+            const navbarCollapse = document.querySelector('.navbar-collapse');
+
+            navbarToggler?.addEventListener('click', function () {
+                setTimeout(() => {
+                    if (navbarCollapse.classList.contains('show')) {
+                        navbarCollapse.style.animation = 'slideDown 0.3s ease-out';
+                    }
+                }, 10);
+            });
+        });
+    </script>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="heroSection">
+        <!-- Slide 1 -->
+        <div class="hero-slide active"
+            data-bg="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80">
+            <div class="hero-overlay"></div>
+            <div class="container">
+                <div class="row align-items-center hero-row">
+                    <div class="col-lg-6">
+                        <div class="hero-content">
+                            <div class="hero-badge">
+                                <i class="fas fa-trophy"></i>
+                                #1 Fitness Platform 2024
+                            </div>
+                            <h1 class="hero-title">
+                                <span class="text-white">Transform Body</span><br>
+                                <span class="text-gradient">Transform Your Life</span>
+                            </h1>
+                            <p class="hero-description">
+                                Join thousands who have achieved their fitness goals with personalized plans and expert
+                                guidance.
+                            </p>
+                            <div class="hero-features">
+                                <div class="feature-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>AI-Powered Plans</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Expert Trainers</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>24/7 Support</span>
+                                </div>
+                            </div>
+                            <div class="hero-buttons">
+                                <a href="/enroll/" class="btn btn-primary btn-lg">Start Free Trial <i
+                                        class="fas fa-arrow-right"></i></a>
+                                <a href="/enroll/" class="btn btn-outline btn-lg">Watch Demo</a>
+                            </div>
+                            <div class="hero-trust-badges">
+                                <div class="trust-badge">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <span>Secure & Private</span>
+                                </div>
+                                <div class="trust-badge">
+                                    <i class="fas fa-users"></i>
+                                    <span>50K+ Members</span>
+                                </div>
+                                <div class="trust-badge">
+                                    <i class="fas fa-star"></i>
+                                    <span>4.9/5 Rating</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="hero-stats-card">
+                            <div class="stats-item">
+                                <div class="stats-number">50K+</div>
+                                <div class="stats-label">Active Members</div>
+                                <div class="stats-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                            </div>
+                            <div class="stats-divider"></div>
+                            <div class="stats-item">
+                                <div class="stats-number">500+</div>
+                                <div class="stats-label">Workout Plans</div>
+                                <div class="stats-icon">
+                                    <i class="fas fa-dumbbell"></i>
+                                </div>
+                            </div>
+                            <div class="floating-heart">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="hero-slide"
+            data-bg="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80">
+            <div class="hero-overlay"></div>
+            <div class="container">
+                <div class="row align-items-center hero-row">
+                    <div class="col-lg-6">
+                        <div class="hero-content">
+                            <div class="hero-badge">
+                                <i class="fas fa-fire"></i>
+                                Expert Training Programs
+                            </div>
+                            <h1 class="hero-title">
+                                <span class="text-white">Build Strength</span><br>
+                                <span class="text-gradient">Build Confidence</span>
+                            </h1>
+                            <p class="hero-description">
+                                Expert-led strength training programs designed to push your limits and unlock your
+                                potential.
+                            </p>
+                            <div class="hero-features">
+                                <div class="feature-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Progressive Training</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Form Analysis</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Recovery Tracking</span>
+                                </div>
+                            </div>
+                            <div class="hero-buttons">
+                                <a href="#" class="btn btn-primary btn-lg">Start Free Trial <i
+                                        class="fas fa-arrow-right"></i></a>
+                                <a href="#" class="btn btn-outline btn-lg">Watch Demo</a>
+                            </div>
+                            <div class="hero-trust-badges">
+                                <div class="trust-badge">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <span>Secure & Private</span>
+                                </div>
+                                <div class="trust-badge">
+                                    <i class="fas fa-users"></i>
+                                    <span>50K+ Members</span>
+                                </div>
+                                <div class="trust-badge">
+                                    <i class="fas fa-star"></i>
+                                    <span>4.9/5 Rating</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="hero-stats-card">
+                            <div class="stats-item">
+                                <div class="stats-number">75K+</div>
+                                <div class="stats-label">Active Members</div>
+                                <div class="stats-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                            </div>
+                            <div class="stats-divider"></div>
+                            <div class="stats-item">
+                                <div class="stats-number">800+</div>
+                                <div class="stats-label">Workout Plans</div>
+                                <div class="stats-icon">
+                                    <i class="fas fa-dumbbell"></i>
+                                </div>
+                            </div>
+                            <div class="floating-heart">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Dots -->
+        <div class="hero-dots">
+            <span class="dot active" data-slide="0"></span>
+            <span class="dot" data-slide="1"></span>
+        </div>
+    </section>
+
+    <style>
+        /* ==================== HERO SECTION STYLES ==================== */
+        .hero-section {
+            position: relative;
+            min-height: 100vh;
+            /* Changed from height to min-height */
+            overflow: hidden;
+        }
+
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            min-height: 100vh;
+            /* Changed from height to min-height */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            padding-top: 80px;
+            padding-bottom: 60px;
+            /* Added bottom padding */
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+        }
+
+        .hero-row {
+            min-height: calc(100vh - 140px);
+            /* Account for top/bottom padding */
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            animation: slideInLeft 1s ease-out;
+            padding: 2rem 0;
+            /* Added vertical padding */
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .hero-badge i {
+            margin-right: 0.5rem;
+            color: #ffd700;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #ffd700 0%, #ffb700 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .hero-features {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-bottom: 2rem;
+            /* Reduced from 2.5rem */
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            color: white;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .feature-item i {
+            color: #ffd700;
+            margin-right: 0.8rem;
+            font-size: 1.1rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            /* Reduced from 2rem */
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            border: 2px solid transparent;
+            position: relative;
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #ffd700 0%, #ffb700 100%);
+            color: #1a1a1a;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+            color: #1a1a1a;
+            text-decoration: none;
+        }
+
+        .btn-outline {
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+            color: white;
+            text-decoration: none;
+            transform: translateY(-1px);
+        }
+
+        .hero-trust-badges {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+            /* Reduced from 1rem */
+        }
+
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+
+        .trust-badge i {
+            color: #ffd700;
+            margin-right: 0.5rem;
+        }
+
+        /* Stats Card */
+        .hero-stats-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+            animation: slideInRight 1s ease-out;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            margin: 2rem 0;
+            /* Added vertical margin */
+        }
+
+        .stats-item {
+            text-align: center;
+            color: white;
+        }
+
+        .stats-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(99, 102, 241, 0.3);
+        }
+
+        .stats-label {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1rem;
+        }
+
+        .stats-icon {
+            font-size: 1.2rem;
+            color: #ffd700;
+        }
+
+        .stats-divider {
+            height: 1px;
+            background: rgba(255, 255, 255, 0.2);
+            margin: 1.5rem 0;
+        }
+
+        .floating-heart {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #ffd700 0%, #ffb700 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1a1a1a;
+            font-size: 1.5rem;
+            animation: float 3s ease-in-out infinite;
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
+        }
+
+        /* Navigation Dots */
+        .hero-dots {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.8rem;
+            z-index: 3;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: #ffd700;
+            transform: scale(1.2);
+        }
+
+        /* Animations */
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 991px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.8rem;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .hero-stats-card {
+                margin-top: 2rem;
+            }
+
+            .hero-trust-badges {
+                justify-content: center;
+            }
+
+            .hero-content {
+                padding: 1rem 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+                margin-bottom: 1rem;
+            }
+
+            .hero-description {
+                font-size: 1rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .btn {
+                padding: 0.7rem 1.5rem;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .hero-features {
+                margin-bottom: 1.5rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                margin-bottom: 1rem;
+                gap: 0.8rem;
+            }
+
+            .hero-slide {
+                padding-bottom: 40px;
+            }
+
+            .hero-content {
+                padding: 1rem 0;
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .hero-buttons {
+                flex-wrap: wrap;
+                gap: 0.8rem;
+            }
+
+            .btn {
+                flex: 1;
+                min-width: 180px;
+            }
+        }
+
+        /* Ensure content doesn't overflow on very small screens */
+        @media (max-height: 700px) {
+            .hero-slide {
+                padding-top: 60px;
+                padding-bottom: 40px;
+            }
+
+            .hero-content {
+                padding: 1rem 0;
+            }
+
+            .hero-title {
+                font-size: 2.2rem;
+                margin-bottom: 1rem;
+            }
+
+            .hero-features {
+                margin-bottom: 1.2rem;
+            }
+
+            .hero-buttons {
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const slides = document.querySelectorAll('.hero-slide');
+            const dots = document.querySelectorAll('.dot');
+            let currentSlide = 0;
+
+            // Set background images
+            slides.forEach(slide => {
+                const bgUrl = slide.getAttribute('data-bg');
+                slide.style.backgroundImage = `url(${bgUrl})`;
+            });
+
+            // Auto slide functionality
+            function nextSlide() {
+                slides[currentSlide].classList.remove('active');
+                dots[currentSlide].classList.remove('active');
+
+                currentSlide = (currentSlide + 1) % slides.length;
+
+                slides[currentSlide].classList.add('active');
+                dots[currentSlide].classList.add('active');
+            }
+
+            // Manual dot navigation
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    slides[currentSlide].classList.remove('active');
+                    dots[currentSlide].classList.remove('active');
+
+                    currentSlide = index;
+
+                    slides[currentSlide].classList.add('active');
+                    dots[currentSlide].classList.add('active');
+                });
+            });
+
+            // Auto-play slides every 5 seconds
+            setInterval(nextSlide, 5000);
+        });
+    </script>
+
+
+    <section class="our-impact">
+        <div class="impact-container">
+            <h2 class="impact-title">Our Impact</h2>
+            <p class="impact-subtitle">Join thousands of people who have transformed their lives</p>
+
+            <div class="stats-grid">
+                <div class="stat-card" data-delay="0.2">
+                    <div class="stat-icon">👥</div>
+                    <span class="stat-number" data-target="50000">0</span>
+                    <div class="stat-label">Active Members</div>
+                </div>
+
+                <div class="stat-card" data-delay="0.4">
+                    <div class="stat-icon">🏋️</div>
+                    <span class="stat-number" data-target="500">0</span>
+                    <div class="stat-label">Workout Plans</div>
+                </div>
+
+                <div class="stat-card" data-delay="0.6">
+                    <div class="stat-icon">🏆</div>
+                    <span class="stat-number" data-target="95">0</span>
+                    <div class="stat-label">Success Rate</div>
+                </div>
+
+                <div class="stat-card" data-delay="0.8">
+                    <div class="stat-icon">🛡️</div>
+                    <span class="stat-number">24/7</span>
+                    <div class="stat-label">Expert Support</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- ==================== HERO SECTION 2 ==================== -->
+<section class="hero-section-2" id="heroSection2">
+    <div class="hero2-background"></div>
+    <div class="hero2-overlay"></div>
+    
+    <!-- Fitness Icons Background -->
+    <div class="fitness-icons-background-2">
+       <!-- Gym -->
+<i class="fas fa-dumbbell fitness-icon-2 icon-2-1"></i>
+<i class="fas fa-running fitness-icon-2 icon-2-2"></i>
+<i class="fas fa-weight-hanging fitness-icon-2 icon-2-3"></i>
+<i class="fas fa-heartbeat fitness-icon-2 icon-2-4"></i>
+<i class="fas fa-tachometer-alt fitness-icon-2 icon-2-5"></i>
+<i class="fas fa-stopwatch fitness-icon-2 icon-2-11"></i>
+<i class="fas fa-bolt fitness-icon-2 icon-2-12"></i> <!-- Energy -->
+<i class="fas fa-shoe-prints fitness-icon-2 icon-2-13"></i> <!-- Running motion -->
+<i class="fas fa-user-ninja fitness-icon-2 icon-2-14"></i> <!-- Intense training style -->
+<i class="fas fa-star fitness-icon-2 icon-2-15"></i> <!-- Personal best/goal -->
+
+<i class="fas fa-apple-alt fitness-icon-2 icon-2-6"></i>
+<i class="fas fa-carrot fitness-icon-2 icon-2-7"></i>
+<i class="fas fa-utensils fitness-icon-2 icon-2-8"></i>
+<i class="fas fa-bottle-water fitness-icon-2 icon-2-9"></i> <!-- Use fa-water if not available -->
+<i class="fas fa-notes-medical fitness-icon-2 icon-2-10"></i>
+<i class="fas fa-blender-phone fitness-icon-2 icon-2-16"></i> <!-- Meal prep/blending -->
+<i class="fas fa-clipboard-list fitness-icon-2 icon-2-17"></i> <!-- Diet chart -->
+<i class="fas fa-pills fitness-icon-2 icon-2-18"></i> <!-- Supplements -->
+<i class="fas fa-egg fitness-icon-2 icon-2-19"></i> <!-- Protein source -->
+<i class="fas fa-bread-slice fitness-icon-2 icon-2-20"></i> <!-- Carbs -->
+
+    </div>
+    
+    <div class="container">
+        <div class="row align-items-center min-vh-100">
+            <!-- Left Content -->
+            <div class="col-lg-6">
+                <div class="hero2-content">
+                    <h1 class="hero2-title">
+                        Feel Great.<br>
+                        <span class="hero2-subtitle">Body and Mind.</span>
+                    </h1>
+                    
+                    <p class="hero2-description">
+                        Choose from hundreds of workouts, healthy recipes, relaxing meditations, and expert articles, for a whole body and mind approach to feeling great.
+                    </p>
+                    
+                    <div class="hero2-actions">
+                        <a href="/enroll/" class="btn hero2-btn-primary">Join Now</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Content - Profile Circles with Achievements -->
+            <div class="col-lg-6">
+                <div class="profile-container-2">
+                    <div class="profile-circle-2 profile-2-1" data-achievement="Lost 25 lbs">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" alt="Profile 1">
+                        <div class="achievement-badge-2 weight-loss-2">
+                            <i class="bi bi-arrow-down-circle"></i>
+                            <span>-25 lbs</span>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-circle-2 profile-2-2" data-achievement="Gained Muscle">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" alt="Profile 2">
+                        <div class="achievement-badge-2 muscle-gain-2">
+                            <i class="bi bi-lightning-charge"></i>
+                            <span>+15% Muscle</span>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-circle-2 profile-2-3" data-achievement="Lost 40 lbs">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face" alt="Profile 3">
+                        <div class="achievement-badge-2 weight-loss-2">
+                            <i class="bi bi-trophy"></i>
+                            <span>-40 lbs</span>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-circle-2 profile-2-4" data-achievement="Dream Body Achieved">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face" alt="Profile 4">
+                        <div class="achievement-badge-2 dream-body-2">
+                            <i class="bi bi-star-fill"></i>
+                            <span>Dream Body</span>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-circle-2 profile-2-5" data-achievement="Lost 30 lbs">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face" alt="Profile 5">
+                        <div class="achievement-badge-2 weight-loss-2">
+                            <i class="bi bi-heart-pulse"></i>
+                            <span>-30 lbs</span>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-circle-2 profile-2-6" data-achievement="Transformation Complete">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face" alt="Profile 6">
+                        <div class="achievement-badge-2 transformation-2">
+                            <i class="bi bi-arrow-repeat"></i>
+                            <span>Transformed</span>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-circle-2 profile-2-7" data-achievement="Lost 35 lbs">
+                        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&h=150&fit=crop&crop=face" alt="Profile 7">
+                        <div class="achievement-badge-2 weight-loss-2">
+                            <i class="bi bi-check-circle-fill"></i>
+                            <span>-35 lbs</span>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-circle-2 profile-2-8" data-achievement="Fitness Goal Reached">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face" alt="Profile 8">
+                        <div class="achievement-badge-2 fitness-goal-2">
+                            <i class="bi bi-bullseye"></i>
+                            <span>Goal Reached</span>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-circle-2 profile-2-9" data-achievement="Lost 20 lbs">
+                        <img src="https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=150&h=150&fit=crop&crop=face" alt="Profile 9">
+                        <div class="achievement-badge-2 weight-loss-2">
+                            <i class="bi bi-graph-down-arrow"></i>
+                            <span>-20 lbs</span>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-circle-2 profile-2-10" data-achievement="Body Transformation">
+                        <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=150&h=150&fit=crop&crop=face" alt="Profile 10">
+                        <div class="achievement-badge-2 transformation-2">
+                            <i class="bi bi-award"></i>
+                            <span>New Me</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+/* ==================== HERO SECTION 2 STYLES ==================== */
+.hero-section-2 {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.hero2-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    z-index: 1;
+}
+
+.hero2-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(122, 185, 227, 0.1);
+    z-index: 2;
+}
+
+/* ==================== FITNESS ICONS BACKGROUND ==================== */
+.fitness-icons-background-2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.fitness-icon-2 {
+    position: absolute;
+    color: rgba(255, 255, 255, 0.2);
+    font-size: 2rem;
+    animation: continuousBlink2 3s ease-in-out infinite;
+    transition: all 0.3s ease;
+}
+
+.fitness-icon-2:hover {
+    color: rgba(255, 255, 255, 0.6);
+    transform: scale(1.2);
+}
+
+/* Individual icon positioning and different animation delays */
+.icon-2-1 { 
+    top: 10%; left: 5%; 
+    animation: continuousBlink2 2.5s ease-in-out infinite;
+    animation-delay: 0s; 
+    font-size: 1.8rem; 
+}
+.icon-2-2 { 
+    top: 15%; right: 8%; 
+    animation: continuousBlink2 3.2s ease-in-out infinite;
+    animation-delay: 0.3s; 
+    font-size: 2.2rem; 
+}
+.icon-2-3 { 
+    top: 25%; left: 15%; 
+    animation: continuousBlink2 2.8s ease-in-out infinite;
+    animation-delay: 0.6s; 
+    font-size: 1.5rem; 
+}
+.icon-2-4 { 
+    top: 35%; right: 20%; 
+    animation: continuousBlink2 3.5s ease-in-out infinite, rotateIcon2 12s linear infinite;
+    animation-delay: 0.9s; 
+    font-size: 2.5rem; 
+}
+.icon-2-5 { 
+    top: 45%; left: 8%; 
+    animation: continuousBlink2 2.7s ease-in-out infinite;
+    animation-delay: 1.2s; 
+    font-size: 1.8rem; 
+}
+.icon-2-6 { 
+    top: 55%; right: 12%; 
+    animation: continuousBlink2 3.1s ease-in-out infinite;
+    animation-delay: 1.5s; 
+    font-size: 2rem; 
+}
+.icon-2-7 { 
+    top: 65%; left: 12%; 
+    animation: continuousBlink2 2.9s ease-in-out infinite;
+    animation-delay: 1.8s; 
+    font-size: 1.6rem; 
+}
+.icon-2-8 { 
+    top: 75%; right: 15%; 
+    animation: continuousBlink2 3.3s ease-in-out infinite;
+    animation-delay: 2.1s; 
+    font-size: 2.3rem; 
+}
+.icon-2-9 { 
+    top: 20%; left: 25%; 
+    animation: continuousBlink2 2.6s ease-in-out infinite;
+    animation-delay: 2.4s; 
+    font-size: 1.7rem; 
+}
+.icon-2-10 { 
+    top: 40%; right: 35%; 
+    animation: continuousBlink2 3.4s ease-in-out infinite, rotateIcon2 12s linear infinite;
+    animation-delay: 2.7s; 
+    font-size: 2.1rem; 
+}
+.icon-2-11 { 
+    top: 60%; left: 20%; 
+    animation: continuousBlink2 2.4s ease-in-out infinite;
+    animation-delay: 3s; 
+    font-size: 1.9rem; 
+}
+.icon-2-12 { 
+    top: 80%; right: 25%; 
+    animation: continuousBlink2 3.6s ease-in-out infinite;
+    animation-delay: 0.2s; 
+    font-size: 1.4rem; 
+}
+.icon-2-13 { 
+    top: 30%; left: 35%; 
+    animation: continuousBlink2 2.3s ease-in-out infinite;
+    animation-delay: 0.5s; 
+    font-size: 2.4rem; 
+}
+.icon-2-14 { 
+    top: 50%; right: 45%; 
+    animation: continuousBlink2 3.7s ease-in-out infinite;
+    animation-delay: 0.8s; 
+    font-size: 1.6rem; 
+}
+.icon-2-15 { 
+    top: 70%; left: 30%; 
+    animation: continuousBlink2 2.2s ease-in-out infinite;
+    animation-delay: 1.1s; 
+    font-size: 2rem; 
+}
+.icon-2-16 { 
+    top: 85%; right: 40%; 
+    animation: continuousBlink2 3.8s ease-in-out infinite;
+    animation-delay: 1.4s; 
+    font-size: 1.8rem; 
+}
+.icon-2-17 { 
+    top: 5%; left: 40%; 
+    animation: continuousBlink2 2.1s ease-in-out infinite;
+    animation-delay: 1.7s; 
+    font-size: 2.2rem; 
+}
+.icon-2-18 { 
+    top: 90%; left: 40%; 
+    animation: continuousBlink2 3.9s ease-in-out infinite;
+    animation-delay: 2s; 
+    font-size: 1.5rem; 
+}
+.icon-2-19 { 
+    top: 35%; left: 50%; 
+    animation: continuousBlink2 2s ease-in-out infinite;
+    animation-delay: 2.3s; 
+    font-size: 2.3rem; 
+}
+.icon-2-20 { 
+    top: 75%; right: 5%; 
+    animation: continuousBlink2 4s ease-in-out infinite;
+    animation-delay: 2.6s; 
+    font-size: 1.7rem; 
+}
+
+/* Continuous blinking animation */
+@keyframes continuousBlink2 {
+    0%, 100% {
+        opacity: 0.2;
+        transform: scale(1);
+    }
+    25% {
+        opacity: 0.6;
+        transform: scale(1.1);
+    }
+    50% {
+        opacity: 0.8;
+        transform: scale(1.15);
+    }
+    75% {
+        opacity: 0.4;
+        transform: scale(1.05);
+    }
+}
+
+/* Rotating effect for trophy and award icons */
+@keyframes rotateIcon2 {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.hero2-content {
+    position: relative;
+    z-index: 3;
+    padding: 2rem 0;
+}
+
+.hero2-title {
+    font-size: 3.5rem;
+    font-weight: 300;
+    color: white;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    animation: fadeInUp2 1s ease-out;
+}
+
+.hero2-subtitle {
+    font-weight: 700;
+}
+
+.hero2-description {
+    font-size: 1.25rem;
+    color: rgba(255,255,255,0.9);
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+    max-width: 500px;
+    animation: fadeInUp2 1s ease-out 0.2s both;
+}
+
+.hero2-actions {
+    animation: fadeInUp2 1s ease-out 0.4s both;
+}
+
+.hero2-btn-primary {
+    background: white;
+    color: #4facfe;
+    border: none;
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+}
+
+.hero2-btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    background: rgba(255,255,255,0.95);
+    color: #4facfe;
+}
+
+/* Profile Circles */
+.profile-container-2 {
+    position: relative;
+    height: 600px;
+    z-index: 3;
+}
+
+.profile-circle-2 {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: visible;
+    border: 4px solid rgba(255,255,255,0.8);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    animation: float2 6s ease-in-out infinite;
+    cursor: pointer;
+}
+
+.profile-circle-2 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.profile-circle-2:hover {
+    transform: scale(1.1);
+    border-color: white;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+}
+
+.profile-circle-2:hover .achievement-badge-2 {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Achievement Badges */
+.achievement-badge-2 {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+    color: white;
+    border-radius: 20px;
+    padding: 4px 8px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    box-shadow: 0 4px 15px rgba(63, 106, 137, 0.2);
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    white-space: nowrap;
+    z-index: 10;
+}
+
+.achievement-badge-2 i {
+    font-size: 0.8rem;
+}
+
+/* Different badge colors for different achievements */
+.weight-loss-2 {
+    background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+}
+
+.muscle-gain-2 {
+    background: linear-gradient(135deg, #4ecdc4, #44a08d);
+}
+
+.dream-body-2 {
+    background: linear-gradient(135deg, #ffeaa7, #fab1a0);
+}
+
+.transformation-2 {
+    background: linear-gradient(135deg, #a29bfe, #6c5ce7);
+}
+
+.fitness-goal-2 {
+    background: linear-gradient(135deg, #00b894, #00cec9);
+}
+
+/* Profile positioning */
+.profile-2-1 { top: 10%; left: 20%; animation-delay: 0s; }
+.profile-2-2 { top: 5%; right: 15%; animation-delay: 1s; }
+.profile-2-3 { top: 25%; left: 5%; animation-delay: 2s; }
+.profile-2-4 { top: 40%; right: 30%; animation-delay: 0.5s; }
+.profile-2-5 { top: 35%; left: 40%; animation-delay: 1.5s; }
+.profile-2-6 { top: 55%; right: 10%; animation-delay: 2.5s; }
+.profile-2-7 { bottom: 25%; left: 10%; animation-delay: 3s; }
+.profile-2-8 { bottom: 15%; right: 35%; animation-delay: 3.5s; }
+.profile-2-9 { bottom: 35%; left: 35%; animation-delay: 4s; }
+.profile-2-10 { bottom: 10%; right: 20%; animation-delay: 4.5s; }
+
+/* Show badges on mobile by default */
+@media (max-width: 768px) {
+    .achievement-badge-2 {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    
+    .fitness-icon-2 {
+        font-size: 1.5rem;
+    }
+    
+    .icon-2-4, .icon-2-13, .icon-2-19 {
+        font-size: 1.8rem;
+    }
+}
+
+/* Animations */
+@keyframes fadeInUp2 {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float2 {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes pulse2 {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+    }
+}
+
+/* Add pulse effect to some profiles */
+.profile-2-1, .profile-2-3, .profile-2-5, .profile-2-7, .profile-2-9 {
+    animation: float2 6s ease-in-out infinite, pulse2 3s infinite;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero2-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero2-description {
+        font-size: 1.1rem;
+    }
+    
+    .profile-circle-2 {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .profile-container-2 {
+        height: 400px;
+        margin-top: 3rem;
+    }
+    
+    .achievement-badge-2 {
+        font-size: 0.6rem;
+        padding: 3px 6px;
+        right: -5px;
+        top: -5px;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero2-title {
+        font-size: 2rem;
+    }
+    
+    .hero2-description {
+        font-size: 1rem;
+    }
+    
+    .hero2-btn-primary {
+        padding: 0.875rem 2rem;
+        font-size: 1rem;
+    }
+}
+
+/* Button ripple effect */
+.btn-ripple-2 {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(79, 172, 254, 0.3);
+    transform: scale(0);
+    animation: ripple2 0.6s linear;
+    pointer-events: none;
+}
+
+@keyframes ripple2 {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+</style>
+
+<script>
+/* ==================== HERO SECTION 2 JAVASCRIPT ==================== */
+document.addEventListener('DOMContentLoaded', function() {
+    // Parallax effect for hero2 background
+    window.addEventListener('scroll', function() {
+        const scrolled = window.pageYOffset;
+        const parallax = document.querySelector('.hero2-background');
+        const speed = scrolled * 0.5;
+        
+        if (parallax) {
+            parallax.style.transform = `translateY(${speed}px)`;
+        }
+    });
+    
+    // Profile circles hover effect
+    const profileCircles2 = document.querySelectorAll('.profile-circle-2');
+    
+    profileCircles2.forEach((circle, index) => {
+        circle.addEventListener('mouseenter', function() {
+            // Pause animation on hover
+            this.style.animationPlayState = 'paused';
+        });
+        
+        circle.addEventListener('mouseleave', function() {
+            // Resume animation
+            this.style.animationPlayState = 'running';
+        });
+        
+        // Add click effect for mobile
+        circle.addEventListener('click', function() {
+            const badge = this.querySelector('.achievement-badge-2');
+            if (badge) {
+                badge.style.transform = 'translate(-50%, -50%) scale(1.2)';
+                setTimeout(() => {
+                    badge.style.transform = 'translate(-50%, -50%) scale(1)';
+                }, 200);
+            }
+        });
+        
+        // Random animation delays for more organic movement
+        circle.style.animationDelay = `${Math.random() * 5}s`;
+    });
+    
+    // Auto-show random achievement badges periodically
+    setInterval(() => {
+        const randomProfile = profileCircles2[Math.floor(Math.random() * profileCircles2.length)];
+        const badge = randomProfile.querySelector('.achievement-badge-2');
+        
+        if (badge && window.innerWidth > 768) {
+            badge.style.opacity = '1';
+            badge.style.transform = 'translate(-50%, -50%) scale(1)';
+            
+            setTimeout(() => {
+                badge.style.opacity = '0';
+                badge.style.transform = 'translate(-50%, -50%) scale(0.8)';
+            }, 2000);
+        }
+    }, 4000);
+    
+    // Enhanced fitness icons interaction
+    const fitnessIcons2 = document.querySelectorAll('.fitness-icon-2');
+    
+    // Add random brightness effect to icons (this will enhance the existing blink effect)
+    setInterval(() => {
+        const randomIcon = fitnessIcons2[Math.floor(Math.random() * fitnessIcons2.length)];
+        randomIcon.style.color = 'rgba(255, 255, 255, 0.9)';
+        randomIcon.style.transform = 'scale(1.3)';
+        
+        setTimeout(() => {
+            randomIcon.style.color = 'rgba(255, 255, 255, 0.2)';
+            randomIcon.style.transform = 'scale(1)';
+        }, 800);
+    }, 2000);
+    
+    // Add button ripple effect
+    const heroBtn2 = document.querySelector('.hero2-btn-primary');
+    if (heroBtn2) {
+        heroBtn2.addEventListener('click', function(e) {
+            const ripple = document.createElement('span');
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+            
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            ripple.classList.add('btn-ripple-2');
+            
+            this.appendChild(ripple);
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        });
+    }
+});
+</script>
+
+<!-- External Dependencies -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <!-- Nutrition Plans Section -->
+    <section class="nutrition-plans-section py-5">
+        <div class="container">
+            <!-- Section Header -->
+            <div class="row align-items-center mb-5">
+                <div class="col-lg-8">
+                    <h2 class="nutrition-title">Nutrition Plans</h2>
+                    <p class="nutrition-subtitle">Expert nutrition plans to fuel your fitness journey</p>
+                </div>
+                <div class="col-lg-4 text-end">
+                    <a href="#" class="see-all-btn">
+                        See All Diets <i class="fas fa-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Nutrition Cards -->
+            <div class="row g-4">
+                <!-- Keto Power Plan -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="nutrition-card">
+                        <div class="card-image">
+                            <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                                alt="Keto Power" class="card-img">
+                            <div class="rating-badge">
+                                <i class="fas fa-star"></i>
+                                <span>4.8</span>
+                            </div>
+                            <div class="duration-badge">30 days</div>
+                        </div>
+
+                        <div class="card-content">
+                            <h3 class="plan-title">Keto Power</h3>
+
+                            <div class="nutrition-stats">
+                                <div class="stat-item">
+                                    <div class="stat-number calories">1800</div>
+                                    <div class="stat-label">Calories</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-number protein">120g</div>
+                                    <div class="stat-label">Protein</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-number carbs">25g</div>
+                                    <div class="stat-label">Carbs</div>
+                                </div>
+                            </div>
+
+                            <div class="plan-benefits">
+                                <span class="benefit-tag">Fat burning</span>
+                                <span class="benefit-tag">Mental clarity</span>
+                                <span class="benefit-tag">Energy boost</span>
+                            </div>
+
+                            <button class="view-plan-btn">View Plan</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Plant-Based Vitality Plan -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="nutrition-card">
+                        <div class="card-image">
+                            <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                                alt="Plant-Based Vitality" class="card-img">
+                            <div class="rating-badge">
+                                <i class="fas fa-star"></i>
+                                <span>4.9</span>
+                            </div>
+                            <div class="duration-badge">21 days</div>
+                        </div>
+
+                        <div class="card-content">
+                            <h3 class="plan-title">Plant-Based Vitality</h3>
+
+                            <div class="nutrition-stats">
+                                <div class="stat-item">
+                                    <div class="stat-number calories">2000</div>
+                                    <div class="stat-label">Calories</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-number protein">80g</div>
+                                    <div class="stat-label">Protein</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-number carbs">250g</div>
+                                    <div class="stat-label">Carbs</div>
+                                </div>
+                            </div>
+
+                            <div class="plan-benefits">
+                                <span class="benefit-tag">Anti-inflammatory</span>
+                                <span class="benefit-tag">Digestive health</span>
+                                <span class="benefit-tag">Sustainability</span>
+                            </div>
+
+                            <button class="view-plan-btn">View Plan</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Muscle Builder Pro Plan -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="nutrition-card">
+                        <div class="card-image">
+                            <img src="https://images.unsplash.com/photo-1482049016688-2d3e1b311543?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                                alt="Muscle Builder Pro" class="card-img">
+                            <div class="rating-badge">
+                                <i class="fas fa-star"></i>
+                                <span>4.7</span>
+                            </div>
+                            <div class="duration-badge">45 days</div>
+                        </div>
+
+                        <div class="card-content">
+                            <h3 class="plan-title">Muscle Builder Pro</h3>
+
+                            <div class="nutrition-stats">
+                                <div class="stat-item">
+                                    <div class="stat-number calories">2200</div>
+                                    <div class="stat-label">Calories</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-number protein">180g</div>
+                                    <div class="stat-label">Protein</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-number carbs">200g</div>
+                                    <div class="stat-label">Carbs</div>
+                                </div>
+                            </div>
+
+                            <div class="plan-benefits">
+                                <span class="benefit-tag">Muscle growth</span>
+                                <span class="benefit-tag">Recovery</span>
+                                <span class="benefit-tag">Performance</span>
+                            </div>
+
+                            <button class="view-plan-btn">View Plan</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        /* Nutrition Plans Section Styles */
+        .nutrition-plans-section {
+            background-color: #121212;
+            color: #f5f5f5;
+            padding: 80px 0;
+        }
+
+        /* Section Header */
+        .nutrition-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .nutrition-subtitle {
+            font-size: 1.1rem;
+            color: #aaa;
+            margin-bottom: 0;
+        }
+
+        .see-all-btn {
+            color: #4A90E2;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            padding: 12px 24px;
+            border: 2px solid #4A90E2;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .see-all-btn:hover {
+            background-color: #4A90E2;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Nutrition Cards */
+        .nutrition-card {
+            background: #1e1e1e;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            height: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nutrition-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-image {
+            position: relative;
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .nutrition-card:hover .card-img {
+            transform: scale(1.05);
+        }
+
+        .rating-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.95);
+            color: #333;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .rating-badge .fas.fa-star {
+            color: #FFD700;
+            font-size: 0.8rem;
+        }
+
+        .duration-badge {
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            background: #4A90E2;
+            color: white;
+            padding: 6px 16px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .card-content {
+            padding: 25px;
+        }
+
+        .plan-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        /* Nutrition Stats */
+        .nutrition-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            gap: 15px;
+        }
+
+        .stat-item {
+            text-align: center;
+            flex: 1;
+        }
+
+        .stat-number {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+            display: block;
+        }
+
+        .stat-number.calories {
+            color: #4A90E2;
+        }
+
+        .stat-number.protein {
+            color: #4CAF50;
+        }
+
+        .stat-number.carbs {
+            color: #FFA726;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: #aaa;
+            font-weight: 500;
+        }
+
+        /* Benefits Tags */
+        .plan-benefits {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 25px;
+        }
+
+        .benefit-tag {
+            background: rgba(255, 255, 255, 0.1);
+            color: #f5f5f5;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* View Plan Button */
+        .view-plan-btn {
+            width: 100%;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .view-plan-btn:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(76, 175, 80, 0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 991px) {
+            .nutrition-title {
+                font-size: 2.2rem;
+            }
+
+            .see-all-btn {
+                margin-top: 1rem;
+            }
+
+            .col-lg-4:not(:last-child) {
+                margin-bottom: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nutrition-plans-section {
+                padding: 60px 0;
+            }
+
+            .nutrition-title {
+                font-size: 2rem;
+                text-align: center;
+            }
+
+            .nutrition-subtitle {
+                text-align: center;
+                margin-bottom: 1rem;
+            }
+
+            .see-all-btn {
+                display: block;
+                text-align: center;
+                width: fit-content;
+                margin: 0 auto;
+            }
+
+            .card-content {
+                padding: 20px;
+            }
+
+            .nutrition-stats {
+                gap: 10px;
+            }
+
+            .stat-number {
+                font-size: 1.2rem;
+            }
+
+            .plan-benefits {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .nutrition-title {
+                font-size: 1.8rem;
+            }
+
+            .card-image {
+                height: 200px;
+            }
+
+            .nutrition-stats {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .stat-item {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px;
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 8px;
+            }
+
+            .stat-number {
+                margin-bottom: 0;
+            }
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Add smooth hover animations
+            const nutritionCards = document.querySelectorAll('.nutrition-card');
+
+            nutritionCards.forEach(card => {
+                card.addEventListener('mouseenter', function () {
+                    this.style.transform = 'translateY(-8px)';
+                });
+
+                card.addEventListener('mouseleave', function () {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+
+            // View Plan button interactions
+            const viewPlanBtns = document.querySelectorAll('.view-plan-btn');
+
+            viewPlanBtns.forEach(btn => {
+                btn.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    // Add click effect
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = 'scale(1)';
+                    }, 150);
+
+                    // Get the plan title
+                    const planTitle = this.closest('.nutrition-card').querySelector('.plan-title').textContent;
+                    console.log(`Viewing plan: ${planTitle}`);
+
+                    // Add your navigation logic here
+                    // Example: window.location.href = `/plan/${planTitle.toLowerCase().replace(/\s+/g, '-')}`;
+                });
+            });
+
+            // See All Diets button
+            const seeAllBtn = document.querySelector('.see-all-btn');
+            if (seeAllBtn) {
+                seeAllBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    console.log('Navigating to all diets page');
+                    // Add your navigation logic here
+                    // Example: window.location.href = '/all-diets';
+                });
+            }
+
+            // Add scroll animation
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe nutrition cards for scroll animation
+            nutritionCards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+                observer.observe(card);
+            });
+        });
+    </script>
+
+
+    <style>
+        /* Make the logos smaller */
+        .partner-logo {
+            width: 150px;
+            /* Adjust width to fit the design */
+            height: auto;
+            /* Maintain aspect ratio */
+            margin: 0 10px;
+            /* Add spacing between logos */
+        }
+
+        /* Optionally style the text */
+        .partnership-text {
+            text-align: center;
+            font-size: 1rem;
+            margin-top: 10px;
+        }
+    </style>
+    <section class="thyrocare-section">
+        <!-- Floating Elements -->
+        <div class="floating-elements">
+            <i class="bi bi-heart-pulse floating-element"></i>
+            <i class="bi bi-shield-plus floating-element"></i>
+            <i class="bi bi-graph-up floating-element"></i>
+            <i class="bi bi-award floating-element"></i>
+        </div>
+
+        <div class="container text-center position-relative">
+            <!-- Partnership Logo -->
+            <div class="logo-section">
+
+                <img src="/static/thyrocare_logo.png" alt="Thyrocare Logo" class="partner-logo">
+            </div>
+            <div class="partnership-text">
+                Official Partnership with Thyrocare
+            </div>
+
+
+            <!-- Main Title -->
+            <h1 class="main-title">
+                Premium Health Tests at<br>
+                <span style="color: #ff6b6b;">Unbeatable Prices!</span>
+            </h1>
+
+            <!-- Subtitle -->
+            <p class="subtitle">
+                Get comprehensive health screenings with India's most trusted diagnostic partner
+            </p>
+
+            <!-- CTA Button -->
+            <a href="/book/" class="cta-button" id="bookNowBtn">
+                <i class="bi bi-calendar-check"></i>
+                Book Your Test Now
+            </a>
+
+            <!-- Features Grid -->
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="bi bi-currency-rupee feature-icon"></i>
+                    <h3 class="feature-title">Up to 70% Off</h3>
+                    <p class="feature-description">Exclusive discounts on all health packages and individual tests</p>
+                </div>
+
+                <div class="feature-card">
+                    <i class="bi bi-house-door feature-icon"></i>
+                    <h3 class="feature-title">Home Collection</h3>
+                    <p class="feature-description">Free sample collection from the comfort of your home</p>
+                </div>
+
+                <div class="feature-card">
+                    <i class="bi bi-clock feature-icon"></i>
+                    <h3 class="feature-title">Quick Reports</h3>
+                    <p class="feature-description">Get accurate results within 24-48 hours via email & SMS</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <style>
+        .thyrocare-section {
+            background: linear-gradient(135deg, #2813b3 0%, #4910b3 100%);
+            position: relative;
+            overflow: hidden;
+            padding: 80px 0;
+            min-height: 500px;
+        }
+
+        .thyrocare-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+            animation: backgroundFloat 6s ease-in-out infinite;
+        }
+
+        @keyframes backgroundFloat {
+
+            0%,
+            100% {
+                transform: translateY(0px) scale(1);
+            }
+
+            50% {
+                transform: translateY(-10px) scale(1.02);
+            }
+        }
+
+        .partnership-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            animation: logoFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes logoFloat {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .logo-container {
+            position: relative;
+        }
+
+        .thyrocare-logo {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            box-shadow:
+                0 20px 40px rgba(0, 0, 0, 0.2),
+                0 0 0 4px rgba(255, 255, 255, 0.3);
+            position: relative;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2), 0 0 0 4px rgba(255, 255, 255, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3), 0 0 0 6px rgba(255, 255, 255, 0.4);
+            }
+
+            100% {
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2), 0 0 0 4px rgba(255, 255, 255, 0.3);
+            }
+        }
+
+        .partnership-text {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .main-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: white;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+            margin-bottom: 25px;
+            line-height: 1.2;
+            animation: titleSlideIn 1s ease-out;
+        }
+
+        @keyframes titleSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .subtitle {
+            font-size: 1.4rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 40px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            animation: subtitleSlideIn 1s ease-out 0.3s both;
+        }
+
+        @keyframes subtitleSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e53);
+            border: none;
+            padding: 18px 40px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            border-radius: 50px;
+            color: white;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow:
+                0 15px 35px rgba(255, 107, 107, 0.4),
+                0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            animation: buttonSlideIn 1s ease-out 0.6s both;
+        }
+
+        @keyframes buttonSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow:
+                0 20px 45px rgba(255, 107, 107, 0.5),
+                0 10px 25px rgba(0, 0, 0, 0.3);
+            color: white;
+            text-decoration: none;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+            animation: featuresSlideIn 1s ease-out 0.9s both;
+        }
+
+        @keyframes featuresSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            animation: cardFloat 4s ease-in-out infinite;
+        }
+
+        .feature-card:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .feature-card:nth-child(2) {
+            animation-delay: 1s;
+        }
+
+        .feature-card:nth-child(3) {
+            animation-delay: 2s;
+        }
+
+        @keyframes cardFloat {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: #fff;
+            margin-bottom: 20px;
+            display: inline-block;
+            animation: iconPulse 2s infinite;
+        }
+
+        @keyframes iconPulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .feature-description {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
+        }
+
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .floating-element {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.1);
+            font-size: 2rem;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) {
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            top: 20%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+
+        .floating-element:nth-child(3) {
+            bottom: 20%;
+            left: 15%;
+            animation-delay: 4s;
+        }
+
+        .floating-element:nth-child(4) {
+            bottom: 15%;
+            right: 10%;
+            animation-delay: 1s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            33% {
+                transform: translateY(-20px) rotate(120deg);
+            }
+
+            66% {
+                transform: translateY(10px) rotate(240deg);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2.5rem;
+            }
+
+            .partnership-logo {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .thyrocare-section {
+                padding: 60px 0;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                margin-top: 40px;
+            }
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Enhanced Animations and Interactions
+        document.addEventListener('DOMContentLoaded', function () {
+            // Parallax effect for floating elements
+            const floatingElements = document.querySelectorAll('.floating-element');
+
+            document.addEventListener('mousemove', function (e) {
+                const mouseX = e.clientX / window.innerWidth;
+                const mouseY = e.clientY / window.innerHeight;
+
+                floatingElements.forEach((element, index) => {
+                    const speed = (index + 1) * 0.5;
+                    const x = (mouseX - 0.5) * speed * 20;
+                    const y = (mouseY - 0.5) * speed * 20;
+
+                    element.style.transform += ` translate(${x}px, ${y}px)`;
+                });
+            });
+
+            // Button click effect with ripple
+
+
+
+
+            // Feature cards hover effect
+            const featureCards = document.querySelectorAll('.feature-card');
+
+            featureCards.forEach(card => {
+                card.addEventListener('mouseenter', function () {
+                    this.style.transform = 'translateY(-15px) scale(1.05)';
+                });
+
+                card.addEventListener('mouseleave', function () {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+
+            // Intersection Observer for animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function (entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all animated elements
+            document.querySelectorAll('.feature-card, .main-title, .subtitle').forEach(el => {
+                observer.observe(el);
+            });
+        });
+
+        // Booking Modal Function
+        function showBookingModal() {
+            // Create modal overlay
+            const modalHtml = `
+                <div class="modal fade" id="bookingModal" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none; border-radius: 20px;">
+                            <div class="modal-body text-center p-4" style="color: white;">
+                                <i class="bi bi-check-circle" style="font-size: 4rem; color: #4ecdc4; margin-bottom: 20px;"></i>
+                                <h4 class="mb-3">Booking Request Received!</h4>
+                                <p class="mb-4">Our team will contact you within 30 minutes to confirm your test booking and schedule home collection.</p>
+                                <button type="button" class="btn btn-light btn-lg rounded-pill px-4" data-bs-dismiss="modal">
+                                    <i class="bi bi-telephone me-2"></i>
+                                    Expect Our Call Soon
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.body.insertAdjacentHTML('beforeend', modalHtml);
+            const modal = new bootstrap.Modal(document.getElementById('bookingModal'));
+            modal.show();
+
+            // Remove modal from DOM after hiding
+            document.getElementById('bookingModal').addEventListener('hidden.bs.modal', function () {
+                this.remove();
+            });
+        }
+
+        // Dynamic background color change based on scroll
+        window.addEventListener('scroll', function () {
+            const scrolled = window.pageYOffset;
+            const section = document.querySelector('.thyrocare-section');
+            const opacity = Math.max(0.7, 1 - scrolled * 0.001);
+            section.style.opacity = opacity;
+        });
+    </script>
+
+
+    <!-- Explore Products Section -->
+    <section class="py-5" style="background-color: #e8f1ea;">
+        <div class="container text-center">
+            <h2 class="mb-4 fw-bold text-dark">Explore Our Products</h2>
+            <p class="text-muted mb-5">Browse through our exclusive range of fitness products and start your journey
+                towards a healthier life.</p>
+
+            <!-- Go to Shop Button -->
+            <div class="mb-4">
+                <a href="/products/" class="btn btn-lg btn-outline-dark px-4  w-100 mb-2"
+                    style="font-size: 0.9rem; border: 2px solid #000; border-radius: 4px;">Go to Shop</a>
+            </div>
+
+            <div class="row justify-content-center g-4">
+                <!-- Loop through each product -->
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced CTA Section -->
+    <section class="py-5 text-center" style="background-color: #fdfdfd;">
+        <div class="container">
+            <h2 class="mb-4 fw-bold text-dark">Explore More with Fitness Tycoon</h2>
+            <p class="text-muted mb-5">Unlock personalized health services and be part of our growing team.</p>
+
+            <div class="row justify-content-center g-4">
+
+                <!-- Blood Test CTA -->
+                <div class="col-md-5">
+                    <div class="p-4 rounded shadow-sm h-100"
+                        style="background: linear-gradient(135deg, #fff, #eaf7f6); border-left: 4px solid var(--brand-teal);">
+                        <h4 class="fw-bold text-dark mb-2">Get Blood Test</h4>
+                        <p class="text-muted mb-3">Affordable diagnostics to keep your fitness goals on track.</p>
+                        <a href="/blood-test/" class="btn btn-outline-success px-4 rounded-pill fw-semibold">
+                            Book Now & Save
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Work with FT CTA -->
+                <div class="col-md-5">
+                    <div class="p-4 rounded shadow-sm h-100"
+                        style="background: linear-gradient(135deg, #fff, #f3eff9); border-left: 4px solid var(--brand-purple);">
+                        <h4 class="fw-bold text-dark mb-2">Work with FT</h4>
+                        <p class="text-muted mb-3">Join us in transforming lives. Apply for upcoming roles.</p>
+                        <a href="/careers/" class="btn btn-outline-primary px-4 rounded-pill fw-semibold">
+                            Apply Now
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- About -->
+    <section class="py-5" style="background: linear-gradient(to right, #e0f7fa, #ffffff); color: #000;">
+        <div class="container">
+            <h2 class="mb-4 text-center">About Fitness Tycoon</h2>
+            <p class="text-center">We provide high-quality fitness products, supplements, and upcoming health services
+                like
+                blood tests and diagnostics tailored for your goals.</p>
+        </div>
+    </section>
+
+    <!-- Testimonials Section (YouTube Videos) -->
+    <section class="py-5" style="background-color: #fdfdfd; color: #000;">
+        <div class="container text-center">
+            <h2 class="mb-4 fw-bold" style="font-size: 2.5rem; color: #2c2c2c;">
+                What Our Clients Say
+            </h2>
+
+            <p class="mb-2 fs-5 fw-semibold">
+                <span>More than <span style="color: #2e7d32;">1200+</span> students</span> have enrolled and rated
+                <span style="color: #ff9800;">4.9</span>
+                <span style="font-size: 1.4rem;">⭐️⭐️⭐️⭐️⭐️</span> out of 5!
+            </p>
+            <p class="fst-italic text-muted mb-5" style="font-size: 1.1rem;">
+                No theory, 100% practical and Live!
+            </p>
+
+            <div class="row justify-content-center g-4">
+                
+                <div class="col-md-6 col-lg-3">
+                    <div class="card border-0 shadow-sm bg-dark" style="overflow: hidden; border-radius: 12px;">
+                        <div class="ratio ratio-16x9">
+                            <iframe src="https://www.youtube.com/embed/oZTFMSObels" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3">
+                    <div class="card border-0 shadow-sm bg-dark" style="overflow: hidden; border-radius: 12px;">
+                        <div class="ratio ratio-16x9">
+                            <iframe src="https://www.youtube.com/embed/yUrvNPhVmFw" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3">
+                    <div class="card border-0 shadow-sm bg-dark" style="overflow: hidden; border-radius: 12px;">
+                        <div class="ratio ratio-16x9">
+                            <iframe src="https://www.youtube.com/embed/xbxPQD4_K4I" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-3">
+                    <div class="card border-0 shadow-sm bg-dark" style="overflow: hidden; border-radius: 12px;">
+                        <div class="ratio ratio-16x9">
+                            <iframe src="https://www.youtube.com/embed/Azoi8mnxZUw" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Community Results Section -->
+    <section class="py-5" style="background-color: #fdfdfd; color: #000;">
+        <div class="container text-center">
+            <h2 class="mb-4 fw-bold"
+                style="font-size: 2.3rem; color: #2c2c2c; text-shadow: 1px 1px 2px rgba(0,0,0,0.05);">
+                Results from the Community 💪
+            </h2>
+            <p class="fst-italic mb-5" style="color: #666; font-size: 1.1rem;">
+                No supplements. No medication. Completely at home.
+            </p>
+
+            <div class="row justify-content-center g-4">
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <div class="card border-0 shadow-sm h-100" style="background-color: #f9f9f9;">
+                        <img src="/static/happy_c1.png" class="card-img-top img-fluid rounded"
+                            style="max-height: 300px; object-fit: cover;" alt="Transformation Result 1">
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <div class="card border-0 shadow-sm h-100" style="background-color: #f9f9f9;">
+                        <img src="/static/happy_c2.jpeg" class="card-img-top img-fluid rounded"
+                            style="max-height: 300px; object-fit: cover;" alt="Transformation Result 2">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Products -->
+    <section class="py-5" style="background-color: #f8f9fa; color: #000;">
+        <div class="container">
+            <h2 class="text-center mb-4 fw-bold" style="font-size: 2.3rem;">
+                🛍️ Top Products
+            </h2>
+            <div class="row text-center">
+                
+            </div>
+        </div>
+    </section>
+
+
+    <footer class="text-light pt-5 pb-3" style="background: linear-gradient(to right, #69b7e7, #5b5de1);">
+        <div class="container">
+            <div class="row text-center text-md-start">
+
+                <div class="col-md-3 mb-4">
+                    <h5 class="fw-bold">Fitness Tycoon</h5>
+                    <p class="text-light">
+                        Your ultimate partner for health, transformation, and top-quality fitness products tailored to
+                        your lifestyle.
+                    </p>
+                </div>
+
+                <div class="col-md-3 mb-4">
+                    <h5 class="fw-bold">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="/products" class="text-light text-decoration-none">Products</a></li>
+                        <li><a href="/enroll" class="text-light text-decoration-none">Enroll Now</a></li>
+                        <li><a href="/login" class="text-light text-decoration-none">Sign In</a></li>
+                        <li><a href="#" class="text-light text-decoration-none">FAQs</a></li>
+                        <li><a href="#" class="text-light text-decoration-none">Privacy Policy</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-3 mb-4">
+                    <h5 class="fw-bold">Contact Us</h5>
+                    <p>📞 +91 9755022727</p>
+                    <p>📧 karansinghrajput@fitnesstycoon.in</p>
+                    <p>📍 Bhopal, Madhya Pradesh</p>
+                    <p>🕒 Available 24 × 7</p>
+                </div>
+
+                <div class="col-md-3 mb-4">
+                    <h5 class="fw-bold">Follow Us</h5>
+                    <p>📸 <a href="#" class="text-light text-decoration-none">Instagram</a></p>
+                    <p>💬 <a href="#" class="text-light text-decoration-none">WhatsApp</a></p>
+                </div>
+
+            </div>
+
+            <hr class="border-light">
+
+            <div class="text-center small">
+                © 2025 <strong>Fitness Tycoon</strong>. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Bootstrap JS + Icons -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Intersection Observer for scroll animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const cards = entry.target.querySelectorAll('.stat-card');
+
+                        cards.forEach((card, index) => {
+                            const delay = parseFloat(card.dataset.delay) * 1000;
+
+                            setTimeout(() => {
+                                card.classList.add('animate-in');
+
+                                // Animate numbers
+                                const numberElement = card.querySelector('.stat-number');
+                                const target = parseInt(numberElement.dataset.target);
+
+                                if (target) {
+                                    animateNumber(numberElement, 0, target, 2000);
+                                }
+                            }, delay);
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            // Animate numbers counting up
+            function animateNumber(element, start, end, duration) {
+                const startTime = performance.now();
+                const suffix = end === 95 ? '%' : (end >= 1000 ? '+' : '');
+
+                function update(currentTime) {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+
+                    const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+                    const current = Math.floor(start + (end - start) * easeOutQuart);
+
+                    element.textContent = current.toLocaleString() + suffix;
+
+                    if (progress < 1) {
+                        requestAnimationFrame(update);
+                    }
+                }
+
+                requestAnimationFrame(update);
+            }
+
+            // Start observing the impact section
+            const impactSection = document.querySelector('.our-impact');
+            if (impactSection) {
+                observer.observe(impactSection);
+            }
+
+            // Add hover effects for cards
+            document.querySelectorAll('.stat-card').forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    const icon = card.querySelector('.stat-icon');
+                    icon.style.animation = 'none';
+                    icon.style.transform = 'scale(1.1) rotate(5deg)';
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    const icon = card.querySelector('.stat-icon');
+                    icon.style.animation = 'pulse 2s infinite';
+                    icon.style.transform = '';
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
